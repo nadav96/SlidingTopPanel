@@ -208,7 +208,7 @@ public class SlidingTopView: UIView {
     //MARK: Debugging area
     public func ColorViews() {
         self.backgroundColor = UIColor.yellowColor()
-        self.PopView.backgroundColor = UIColor.redColor()
+        self.PopView.backgroundColor = UIColor.blueColor()
         
         
     }
