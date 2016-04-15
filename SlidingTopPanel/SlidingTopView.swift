@@ -12,18 +12,18 @@ public class SlidingTopView: UIView {
     
     var parent: CGRect
     
-    let PopView: UIView = UIView()
-    var popBarHeight: CGFloat
+    public let PopView: UIView = UIView()
+    public var popBarHeight: CGFloat
     
-    let MainView: UIView = UIView()
-    var mainViewHeight: CGFloat = 0
+    public let MainView: UIView = UIView()
+    public var mainViewHeight: CGFloat = 0
     
-    let statusBarHeight: CGFloat
-    let navigationBarHeight: CGFloat
-    let totalTopSize: CGFloat
+    public let statusBarHeight: CGFloat
+    public let navigationBarHeight: CGFloat
+    public let totalTopSize: CGFloat
     
     //the state of the slidingPanel, false means its not revealed, and true means it's visible
-    var slidingState: Bool = false
+    public var slidingState: Bool = false
     
     
     //values for the dragging effect
