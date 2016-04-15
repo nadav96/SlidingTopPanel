@@ -56,7 +56,7 @@ public class SlidingTopView: UIView {
         self.setMainView()
         
         //Just for debugging
-        ColorViews()
+        //ColorViews()
         
     }
     public required init?(coder aDecoder: NSCoder) {
@@ -206,9 +206,9 @@ public class SlidingTopView: UIView {
     }
     
     //MARK: Debugging area
-    public func ColorViews() {
-        self.backgroundColor = UIColor.yellowColor()
-        self.PopView.backgroundColor = UIColor.greenColor()
+    public func ColorViews(mainColor: String, popperColor: String) {
+        self.backgroundColor = UIColor(hex: mainColor)
+        self.PopView.backgroundColor = UIColor(hex: popperColor)
         
         
     }
@@ -217,11 +217,30 @@ public class SlidingTopView: UIView {
     
     public func SetRedLine() {
         let bottomLine: UIView = UIView()
-        bottomLine.backgroundColor = UIColor.blueColor()
+        bottomLine.backgroundColor = UIColor.redColor()
         bottomLine.frame = CGRectMake(0, self.popBarHeight - 3, self.frame.size.width, 3)
         self.PopView.addSubview(bottomLine)
     }
     
     
+}
+
+extension UIColor {
+    
+    convenience init(hex: String, alpha: CGFloat = 1) {
+        assert(hex[hex.startIndex] == "#", "Expected hex string of format #RRGGBB")
+        
+        let scanner = NSScanner(string: hex)
+        scanner.scanLocation = 1  // skip #
+        
+        var rgb: UInt32 = 0
+        scanner.scanHexInt(&rgb)
+        
+        self.init(
+            red:   CGFloat((rgb & 0xFF0000) >> 16)/255.0,
+            green: CGFloat((rgb &   0xFF00) >>  8)/255.0,
+            blue:  CGFloat((rgb &     0xFF)      )/255.0,
+            alpha: alpha)
+    }
 }
 
