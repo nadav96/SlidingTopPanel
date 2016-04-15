@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
+public class SlidingTopView: UIView {
     
     var parent: CGRect
     
@@ -48,7 +48,6 @@ public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
         self.frame = CGRectMake(0, -self.parent.height + self.totalTopSize, self.parent.width, self.parent.height)
         
         //set the dragging listener for the whole view, not just the popper!
-        DraggingGesture.delegate = self
         DraggingGesture = UIPanGestureRecognizer(target: self, action: #selector(SlidingTopView.onDragEvent(_:)))
         self.addGestureRecognizer(DraggingGesture)
         
@@ -122,13 +121,15 @@ public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
         
     }
     
-    //MARK: touch events
-    public func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-        return false
-    }
-    
+//    //MARK: touch events
+
+//    public func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+//        return false
+//    }
+//    
     
     public func onDragEvent(sender: UIPanGestureRecognizer) {
+        print("the touching view is: \(sender.view.self)")
         if self.DraggingGesture.state == .Ended
         {
             //print("HELLO IM END")
