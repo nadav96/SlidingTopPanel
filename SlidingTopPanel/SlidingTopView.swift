@@ -10,12 +10,19 @@ import UIKit
 
 public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
     
+    //MARK: vars
     var parent: CGRect
     
-    public let PopView: UIView = UIView()
+    public var PopView: UIView!
+    
+    public var PopViewFrame: CGRect = CGRectMake(0, 0, 0, 0)
     public var popBarHeight: CGFloat
     
-    public var MainView: UIView = UIView()
+    
+    
+    public var MainView: UIView!
+    
+    public var MainViewFrame: CGRect = CGRectMake(0, 0, 0, 0)
     public var mainViewHeight: CGFloat = 0
     
     public let statusBarHeight: CGFloat
@@ -31,6 +38,8 @@ public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
     var lastLocation: CGPoint = CGPointMake(0, 0)
     
     var IsoverflowDrag: Bool = false
+    
+    //MARK: Constructors
     
     required public init(parent: CGRect, popBarSize: CGFloat = 70, navigationHeight: CGFloat = 0) {
         
@@ -53,8 +62,9 @@ public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
         self.addGestureRecognizer(DraggingGesture)
         
         //set the popper and the main views.
-        self.setPopView()
-        self.setMainView()
+//        self.setPopViewFrame()
+        self.PopViewFrame = CGRectMake(0, self.frame.height - popBarHeight, self.frame.width, popBarHeight)
+        self.setMainViewFrame()
         
         //Just for debugging
         //ColorViews()
@@ -64,43 +74,52 @@ public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
         fatalError("init(coder:) has not been implemented")
         
     }
+
+    //MARK: Initailze the popper and the MainView (dynamic support)
     
-    //sets the pop size and args.
-    public func setPopView() {
-        self.PopView.frame = CGRectMake(0, self.frame.height - popBarHeight, self.frame.width, popBarHeight)
+    public func setMainViewFrame() {
+        let topConsider = self.statusBarHeight + self.navigationBarHeight
+        self.mainViewHeight = self.frame.height - self.popBarHeight - topConsider
+        
+        let alignMain: CGFloat = 0
+        self.MainViewFrame = CGRectMake(0, topConsider + alignMain, self.frame.width, self.mainViewHeight - alignMain * 2)
+    }
+    
+    public func AddPopView(popView: UIView) {
+        if self.PopView != nil {
+            self.PopView.removeFromSuperview()
+        }
+        
+        self.PopView = popView
         
         self.PopView.layer.shadowColor = UIColor.blackColor().CGColor
         self.PopView.layer.shadowOpacity = 0.9
         self.PopView.layer.shadowOffset = CGSizeMake(0, 10)
         self.PopView.layer.shadowRadius = 5
         
-        self.addSubview(PopView)
+        PopView.frame = self.PopViewFrame
+        self.addSubview(self.PopView)
         
         //Set click event
         let gesture = UITapGestureRecognizer(target: self, action: #selector(SlidingTopView.onClickPopView(_:)))
         self.PopView.addGestureRecognizer(gesture)
     }
+
     
-    public func setMainView() {
-        let topConsider = self.statusBarHeight + self.navigationBarHeight
-        self.mainViewHeight = self.frame.height - self.popBarHeight - topConsider
+    public func AddMainView(mainView: UIView) {
+        if self.MainView != nil {
+            self.MainView.removeFromSuperview()
+        }
         
-        let alignMain: CGFloat = 20
-        self.MainView.frame = CGRectMake(0, topConsider + alignMain, self.frame.width, self.mainViewHeight - alignMain * 2)
-//        print("Mainviewheight: ", self.mainViewHeight, ", "+" main is: ", self.frame.height)
+        self.MainView = mainView
         
-        //self.MainView.backgroundColor = UIColor.orangeColor()
-        
+        self.MainView.frame = self.MainViewFrame
         self.addSubview(self.MainView)
         
-//        let a = UIView()
-//        a.frame = CGRectMake(0, 1, self.MainView.frame.width, 10)
-//        a.backgroundColor = UIColor.redColor()
-//        
-//        self.MainView.addSubview(a)
-
+        
     }
     
+    //MARK: touch events
     
     public func onClickPopView(sender: UITapGestureRecognizer!) {
         //print("call me maybe")
@@ -122,7 +141,7 @@ public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
         
     }
     
-//    //MARK: touch events
+
 
     public func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         let isChild: Bool = (touch.view?.isKindOfClass(UIButton.self))!
