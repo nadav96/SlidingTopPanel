@@ -11,6 +11,18 @@
 		127B2F881CC03FF700602035 /* SlidingTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127B2F871CC03FF700602035 /* SlidingTopView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		127B2FB61CC0F83A00602035 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		127B2F7A1CC03F3E00602035 /* SlidingTopPanel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SlidingTopPanel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		127B2F7D1CC03F3E00602035 /* SlidingTopPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidingTopPanel.h; sourceTree = "<group>"; };
@@ -77,6 +89,7 @@
 				127B2F761CC03F3E00602035 /* Frameworks */,
 				127B2F771CC03F3E00602035 /* Headers */,
 				127B2F781CC03F3E00602035 /* Resources */,
+				127B2FB61CC0F83A00602035 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -286,6 +299,7 @@
 				127B2F841CC03F3E00602035 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
