@@ -15,7 +15,7 @@ public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
     public let PopView: UIView = UIView()
     public var popBarHeight: CGFloat
     
-    public let MainView: UIView = UIView()
+    public var MainView: UIView = UIView()
     public var mainViewHeight: CGFloat = 0
     
     public let statusBarHeight: CGFloat
@@ -53,7 +53,7 @@ public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
         self.addGestureRecognizer(DraggingGesture)
         
         //set the popper and the main views.
-        setPopView()
+        self.setPopView()
         self.setMainView()
         
         //Just for debugging
@@ -86,7 +86,7 @@ public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
         self.mainViewHeight = self.frame.height - self.popBarHeight - topConsider
         
         let alignMain: CGFloat = 20
-        self.MainView.frame = CGRectMake(alignMain, topConsider + alignMain, self.frame.width - alignMain * 2, self.mainViewHeight - alignMain * 2)
+        self.MainView.frame = CGRectMake(0, topConsider + alignMain, self.frame.width, self.mainViewHeight - alignMain * 2)
 //        print("Mainviewheight: ", self.mainViewHeight, ", "+" main is: ", self.frame.height)
         
         //self.MainView.backgroundColor = UIColor.orangeColor()
