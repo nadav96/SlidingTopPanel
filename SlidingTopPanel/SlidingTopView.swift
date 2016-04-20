@@ -70,8 +70,11 @@ public class SlidingTopView: UIView, UIGestureRecognizerDelegate {
         //ColorViews()
         
     }
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    
+    
+    public required convenience init?(coder aDecoder: NSCoder) {
+        self.init(coder: aDecoder)
         
     }
 
